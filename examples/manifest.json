@@ -1,0 +1,74 @@
+[
+  {
+    "key": "person_class",
+    "path": "examples/person_class/main.dart"
+  },
+  {
+    "key": "fields_methods",
+    "path": "examples/fields_methods/main.dart"
+  },
+  {
+    "key": "constructor_shorthand",
+    "path": "examples/constructor_shorthand/main.dart"
+  },
+  {
+    "key": "named_constructors",
+    "path": "examples/named_constructors/main.dart"
+  },
+  {
+    "key": "initializers",
+    "path": "examples/initializers/main.dart"
+  },
+  {
+    "key": "const_classes",
+    "path": "examples/const_classes/main.dart"
+  },
+  {
+    "key": "getters_setters",
+    "path": "examples/getters_setters/main.dart"
+  },
+  {
+    "key": "privacy_library",
+    "path": "examples/privacy_library/main.dart"
+  },
+  {
+    "key": "extends_person",
+    "path": "examples/extends_person/main.dart"
+  },
+  {
+    "key": "super_parameters",
+    "path": "examples/super_parameters/main.dart"
+  },
+  {
+    "key": "override_super",
+    "path": "examples/override_super/main.dart"
+  },
+  {
+    "key": "abstract_characters",
+    "path": "examples/abstract_characters/main.dart"
+  },
+  {
+    "key": "polymorphism",
+    "path": "examples/polymorphism/main.dart"
+  },
+  {
+    "key": "implements_contract",
+    "path": "examples/implements_contract/main.dart"
+  },
+  {
+    "key": "mixin_capabilities",
+    "path": "examples/mixin_capabilities/main.dart"
+  },
+  {
+    "key": "mixin_on",
+    "path": "examples/mixin_on/main.dart"
+  },
+  {
+    "key": "mixin_logging",
+    "path": "examples/mixin_logging/main.dart"
+  },
+  {
+    "key": "university_integrated",
+    "path": "examples/university_integrated/main.dart"
+  }
+]

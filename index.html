@@ -1,0 +1,1791 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width,initial-scale=1" name="viewport" />
+  <meta content="#10283e" name="theme-color" />
+  <meta
+    content="SICT235 Codelab 05 · Dart classes, constructors, encapsulation, inheritance, abstract classes, interfaces and mixins · interactive OOP lab for students with prior C# experience."
+    name="description" />
+  <link href="images/favicon.svg" rel="icon" type="image/svg+xml" />
+  <title>Codelab 05 · Dart Object-Oriented Programming | SICT235</title>
+  <link href="css/style.css?v=session05-v1" rel="stylesheet" />
+  <link href="css/session05-additions.css?v=session05-v1" rel="stylesheet" />
+  <script defer="" src="js/gists.js"></script>
+  <script defer="" src="js/app.js?v=session05-v1"></script>
+  <script defer="" src="js/session05-interactive.js?v=session05-v1"></script>
+</head>
+
+<body><a class="skip-link" href="#content">Skip to lesson</a>
+  <div class="app-shell">
+    <div class="mobile-scrim" hidden="" id="scrim"></div>
+    <aside aria-label="Codelab navigation" class="sidebar" id="sidebar">
+      <div class="brand">
+        <div aria-hidden="true" class="brand-icon"><svg height="27" viewbox="0 0 32 32" width="27">
+            <path d="M17 3H28L9 22H1L17 3ZM13 24l8-8h-8l-4 4 4 4Zm3 3h11l-6-6-5 6Z" fill="currentColor"></path>
+          </svg></div>
+        <div><span class="brand-label">TVET CODELAB STUDIO</span><strong>Mobile Apps · PDB2</strong></div><button
+          aria-label="Close navigation" class="icon-button sidebar-close" id="sidebarClose" type="button">✕</button>
+      </div>
+      <div class="sidebar-course"><span class="course-code">SICT235 · 2026–2027</span>
+        <h2>Dart Object-Oriented<br />Programming</h2>
+        <p>05 / Classes · Constructors · Inheritance · Mixins</p>
+        <div class="progress-summary"><span>Your progress</span><strong id="progressLabel">0 of 12</strong></div>
+        <div aria-label="Session completion" aria-valuemax="100" aria-valuemin="0" aria-valuenow="0"
+          class="progress-track" id="progressbar" role="progressbar">
+          <div id="progressFill"></div>
+        </div>
+      </div>
+      <nav aria-label="Learning sections">
+        <ol class="step-nav" id="stepList">
+          <li><button class="step-link" data-step="0" type="button"><span class="step-number">01</span><span
+                class="step-nav-text">Prior OOP knowledge · C#<small>8 min</small></span><span aria-hidden="true"
+                class="step-check">✓</span></button></li>
+          <li><button class="step-link" data-step="1" type="button"><span class="step-number">02</span><span
+                class="step-nav-text">From functions to objects<small>7 min</small></span><span aria-hidden="true"
+                class="step-check">✓</span></button></li>
+          <li><button class="step-link" data-step="2" type="button"><span class="step-number">03</span><span
+                class="step-nav-text">Fields, methods and this<small>10 min</small></span><span aria-hidden="true"
+                class="step-check">✓</span></button></li>
+          <li><button class="step-link" data-step="3" type="button"><span class="step-number">04</span><span
+                class="step-nav-text">Constructors and named forms<small>12 min</small></span><span aria-hidden="true"
+                class="step-check">✓</span></button></li>
+          <li><button class="step-link" data-step="4" type="button"><span class="step-number">05</span><span
+                class="step-nav-text">Initialization and null safety<small>9 min</small></span><span aria-hidden="true"
+                class="step-check">✓</span></button></li>
+          <li><button class="step-link" data-step="5" type="button"><span class="step-number">06</span><span
+                class="step-nav-text">Encapsulation and privacy<small>15 min</small></span><span aria-hidden="true"
+                class="step-check">✓</span></button></li>
+          <li><button class="step-link" data-step="6" type="button"><span class="step-number">07</span><span
+                class="step-nav-text">Inheritance and super<small>14 min</small></span><span aria-hidden="true"
+                class="step-check">✓</span></button></li>
+          <li><button class="step-link" data-step="7" type="button"><span class="step-number">08</span><span
+                class="step-nav-text">Overriding and polymorphism<small>9 min</small></span><span aria-hidden="true"
+                class="step-check">✓</span></button></li>
+          <li><button class="step-link" data-step="8" type="button"><span class="step-number">09</span><span
+                class="step-nav-text">Abstract classes<small>9 min</small></span><span aria-hidden="true"
+                class="step-check">✓</span></button></li>
+          <li><button class="step-link" data-step="9" type="button"><span class="step-number">10</span><span
+                class="step-nav-text">Interfaces and implements<small>9 min</small></span><span aria-hidden="true"
+                class="step-check">✓</span></button></li>
+          <li><button class="step-link" data-step="10" type="button"><span class="step-number">11</span><span
+                class="step-nav-text">Mixins and relationships<small>9 min</small></span><span aria-hidden="true"
+                class="step-check">✓</span></button></li>
+          <li><button class="step-link" data-step="11" type="button"><span class="step-number">12</span><span
+                class="step-nav-text">Practice, homework and exit<small>9 min</small></span><span aria-hidden="true"
+                class="step-check">✓</span></button></li>
+        </ol>
+      </nav>
+      <div class="sidebar-bottom"><span class="status-dot"></span>Progress saved on this device<button
+          class="reset-link" id="resetProgress" type="button">Reset progress</button></div>
+    </aside>
+    <div class="main-column">
+      <header class="topbar"><button aria-controls="sidebar" aria-expanded="false" aria-label="Open navigation"
+          class="icon-button menu-toggle" id="menuToggle" type="button">☰</button>
+        <div class="breadcrumbs">SICT235 <span>/</span> Flutter Codelabs <span>/</span> <b>Session 05</b></div>
+        <div class="top-actions"><span class="time-chip">◷ 120 min · flexible</span><button
+            aria-label="Toggle light or dark mode" class="icon-button" id="themeToggle" type="button"><span
+              id="themeIcon">◐</span></button></div>
+      </header>
+      <main class="main-content" id="content" tabindex="-1">
+
+
+
+
+
+
+
+
+
+
+
+
+        <section class="lesson-step" data-step="0" id="section-1">
+          <div class="hero">
+            <div class="hero-copy"><span class="eyebrow">SESSION 05 · GUIDED PRACTICAL LAB</span>
+              <h1>From C# OOP to<br /><em>expressive Dart.</em></h1>
+              <p>Design. Construct. Protect. Extend. Compose.</p>
+              <div class="hero-tags">
+                <span>Classes</span><span>Constructors</span><span>Inheritance</span><span>Mixins</span>
+              </div>
+            </div>
+          </div>
+          <div class="learning-grid">
+            <div class="learning-card"><span class="kicker">ESSENTIAL CONCEPT</span>
+              <h3>Bring your C# OOP knowledge</h3>
+              <p>You already know objects, classes, constructors, encapsulation, inheritance, polymorphism and interface
+                contracts. This is a transfer task, not OOP from zero.</p>
+            </div>
+            <div class="learning-card"><span class="kicker">ESSENTIAL CONCEPT</span>
+              <h3>Learn what is different in Dart</h3>
+              <p>Focus on constructor shorthand, named constructors, null safety, library privacy, super-parameters,
+                implicit interfaces and mixins.</p>
+            </div>
+          </div>
+          <div class="s04-strip"><span>01 · Recall C#</span><span>02 · Compare</span><span>03 · Predict</span><span>04 ·
+              Run</span><span>05 · Modify</span></div>
+          <h2 class="session03-small-heading">Prior-knowledge check · 10 C# OOP questions</h2>
+          <p class="lede">This is a diagnostic check of knowledge you already studied in C#. <br>Select an answer for
+            every question, then evaluate your result.
+          </p>
+          <form class="quiz-form" id="refresherQuiz">
+            <fieldset class="quiz-item">
+              <legend>1. A C# class defines Customer, and two Customer objects are created. What is the class?</legend>
+              <div class="quiz-options"><label class="quiz-choice"><input data-right="true" name="refresherQuiz0"
+                    type="radio" value="0" /><span>The blueprint that specifies the objects’
+                    members</span></label><label class="quiz-choice"><input data-right="false" name="refresherQuiz0"
+                    type="radio" value="1" /><span>The memory address of the first customer</span></label><label
+                  class="quiz-choice"><input data-right="false" name="refresherQuiz0" type="radio" value="2" /><span>A
+                    function call that prints the customer name</span></label></div>
+              <p aria-live="polite" class="quiz-feedback">Choose one option.</p><span class="answer-detail" hidden="">A
+                class specifies data and behavior; each object is an instance of that class.</span>
+            </fieldset>
+            <fieldset class="quiz-item">
+              <legend>2. Two objects are created from the same C# class. What normally describes their instance fields?
+              </legend>
+              <div class="quiz-options"><label class="quiz-choice"><input data-right="false" name="refresherQuiz1"
+                    type="radio" value="0" /><span>They always contain the same values</span></label><label
+                  class="quiz-choice"><input data-right="true" name="refresherQuiz1" type="radio" value="1" /><span>Each
+                    object maintains its own instance state</span></label><label class="quiz-choice"><input
+                    data-right="false" name="refresherQuiz1" type="radio" value="2" /><span>Their fields exist only in
+                    static memory</span></label></div>
+              <p aria-live="polite" class="quiz-feedback">Choose one option.</p><span class="answer-detail"
+                hidden="">Ordinary instance fields belong to each object; static fields are different.</span>
+            </fieldset>
+            <fieldset class="quiz-item">
+              <legend>3. In C#, what is the clearest distinction between a field and a method?</legend>
+              <div class="quiz-options"><label class="quiz-choice"><input data-right="false" name="refresherQuiz2"
+                    type="radio" value="0" /><span>Both are constructors</span></label><label class="quiz-choice"><input
+                    data-right="true" name="refresherQuiz2" type="radio" value="1" /><span>A field stores state; a
+                    method performs an operation</span></label><label class="quiz-choice"><input data-right="false"
+                    name="refresherQuiz2" type="radio" value="2" /><span>A method can only store a string</span></label>
+              </div>
+              <p aria-live="polite" class="quiz-feedback">Choose one option.</p><span class="answer-detail"
+                hidden="">Fields store data, and methods define behavior.</span>
+            </fieldset>
+            <fieldset class="quiz-item">
+              <legend>4. When is a C# constructor normally executed?</legend>
+              <div class="quiz-options"><label class="quiz-choice"><input data-right="true" name="refresherQuiz3"
+                    type="radio" value="0" /><span>When an instance is created</span></label><label
+                  class="quiz-choice"><input data-right="false" name="refresherQuiz3" type="radio"
+                    value="1" /><span>Every time an instance method is called</span></label><label
+                  class="quiz-choice"><input data-right="false" name="refresherQuiz3" type="radio"
+                    value="2" /><span>Only when an object is garbage collected</span></label></div>
+              <p aria-live="polite" class="quiz-feedback">Choose one option.</p><span class="answer-detail"
+                hidden="">Constructors establish the object’s initial state when the object is created.</span>
+            </fieldset>
+            <fieldset class="quiz-item">
+              <legend>5. A C# bank account prevents its balance from becoming negative. Which OOP principle is
+                illustrated?</legend>
+              <div class="quiz-options"><label class="quiz-choice"><input data-right="false" name="refresherQuiz4"
+                    type="radio" value="0" /><span>Inheritance</span></label><label class="quiz-choice"><input
+                    data-right="false" name="refresherQuiz4" type="radio"
+                    value="1" /><span>Polymorphism</span></label><label class="quiz-choice"><input data-right="true"
+                    name="refresherQuiz4" type="radio" value="2" /><span>Encapsulation</span></label></div>
+              <p aria-live="polite" class="quiz-feedback">Choose one option.</p><span class="answer-detail"
+                hidden="">Encapsulation controls access to data and applies rules through methods or properties.</span>
+            </fieldset>
+            <fieldset class="quiz-item">
+              <legend>6. Which C# member supports controlled reading and writing using get/set accessors?</legend>
+              <div class="quiz-options"><label class="quiz-choice"><input data-right="true" name="refresherQuiz5"
+                    type="radio" value="0" /><span>A property</span></label><label class="quiz-choice"><input
+                    data-right="false" name="refresherQuiz5" type="radio" value="1" /><span>A
+                    namespace</span></label><label class="quiz-choice"><input data-right="false" name="refresherQuiz5"
+                    type="radio" value="2" /><span>An interface instance</span></label></div>
+              <p aria-live="polite" class="quiz-feedback">Choose one option.</p><span class="answer-detail" hidden="">A
+                C# property provides accessors; setters can validate or transform assigned values.</span>
+            </fieldset>
+            <fieldset class="quiz-item">
+              <legend>7. Student derives from Person in C#. Which statement is correct?</legend>
+              <div class="quiz-options"><label class="quiz-choice"><input data-right="false" name="refresherQuiz6"
+                    type="radio" value="0" /><span>Student cannot have extra methods</span></label><label
+                  class="quiz-choice"><input data-right="true" name="refresherQuiz6" type="radio"
+                    value="1" /><span>Student can reuse accessible Person members</span></label><label
+                  class="quiz-choice"><input data-right="false" name="refresherQuiz6" type="radio"
+                    value="2" /><span>Person automatically inherits every Student member</span></label></div>
+              <p aria-live="polite" class="quiz-feedback">Choose one option.</p><span class="answer-detail" hidden="">A
+                derived class inherits accessible members of its base class.</span>
+            </fieldset>
+            <fieldset class="quiz-item">
+              <legend>8. In C#, what does overriding a virtual method allow a derived class to do?</legend>
+              <div class="quiz-options"><label class="quiz-choice"><input data-right="true" name="refresherQuiz7"
+                    type="radio" value="0" /><span>Provide specialized behavior for the same method</span></label><label
+                  class="quiz-choice"><input data-right="false" name="refresherQuiz7" type="radio"
+                    value="1" /><span>Create a second unrelated base class</span></label><label
+                  class="quiz-choice"><input data-right="false" name="refresherQuiz7" type="radio"
+                    value="2" /><span>Make all fields static</span></label></div>
+              <p aria-live="polite" class="quiz-feedback">Choose one option.</p><span class="answer-detail" hidden="">An
+                override changes virtual method behavior while keeping the same member contract.</span>
+            </fieldset>
+            <fieldset class="quiz-item">
+              <legend>9. A List&lt;Person&gt; holds Student and Teacher objects. A virtual Introduce() call behaves
+                differently. Why?</legend>
+              <div class="quiz-options"><label class="quiz-choice"><input data-right="false" name="refresherQuiz8"
+                    type="radio" value="0" /><span>The list changes their runtime types</span></label><label
+                  class="quiz-choice"><input data-right="true" name="refresherQuiz8" type="radio"
+                    value="1" /><span>Polymorphism selects each object’s override</span></label><label
+                  class="quiz-choice"><input data-right="false" name="refresherQuiz8" type="radio" value="2" /><span>All
+                    objects share one static method</span></label></div>
+              <p aria-live="polite" class="quiz-feedback">Choose one option.</p><span class="answer-detail"
+                hidden="">Runtime dispatch uses the actual object’s implementation of the virtual method.</span>
+            </fieldset>
+            <fieldset class="quiz-item">
+              <legend>10. Why would C# developers use an interface?</legend>
+              <div class="quiz-options"><label class="quiz-choice"><input data-right="true" name="refresherQuiz9"
+                    type="radio" value="0" /><span>To define a set of capabilities classes promise to
+                    implement</span></label><label class="quiz-choice"><input data-right="false" name="refresherQuiz9"
+                    type="radio" value="1" /><span>To make every method globally accessible</span></label><label
+                  class="quiz-choice"><input data-right="false" name="refresherQuiz9" type="radio" value="2" /><span>To
+                    provide a required public constructor body</span></label></div>
+              <p aria-live="polite" class="quiz-feedback">Choose one option.</p><span class="answer-detail"
+                hidden="">Interfaces define contracts a type agrees to satisfy.</span>
+            </fieldset>
+          </form>
+          <div class="session03-book-note"><strong>Learning map:</strong> <em>Flutter and Dart Fundamentals</em>,
+            Chapters 6–7; <em>Flutter Cookbook</em>, Chapter 3. The opening check uses general C# OOP knowledge;
+            upcoming examples introduce Dart syntax.</div>
+        </section>
+        <section class="lesson-step" data-step="1" hidden="" id="section-2">
+          <div class="section-top"><span class="overline">STEP 02 · FROM FUNCTIONS TO OBJECTS</span><span
+              class="duration">GUIDED LAB</span></div>
+          <h1 class="section-heading">Classes are a home for related data</h1>
+          <p class="lede">C# already gave you the mental model. The change is how Dart expresses familiar OOP ideas.</p>
+          <h2 class="session03-small-heading">Why move from separate functions to objects?</h2>
+          <div class="s04-compare-grid">
+            <article class=""><span class="kicker">BEFORE · SEPARATE VARIABLES</span>
+              <h3>Loose data</h3>
+              <p>Pass name, age and other related values through many unrelated functions.</p>
+            </article>
+            <article class=""><span class="kicker">AFTER · PERSON CLASS</span>
+              <h3>Data + behavior</h3>
+              <p>A single Person instance carries its own fields and an operation such as greet().</p>
+            </article>
+            <article class="s04-focus-card"><span class="kicker">TRANSFER · C# → DART</span>
+              <h3>Familiar mental model</h3>
+              <p>Both languages use classes and objects. Dart normally omits new when creating an instance.</p>
+            </article>
+          </div>
+          <div class="concept-card s05-talk">
+            <div class="concept-mascot"><img alt="" decoding="async" loading="eager"
+                src="images/dash-study-mascot.webp" /></div>
+            <div class="concept-speech">
+              <h3>A class is a type, not a single object.</h3>
+              <p><code>Person()</code> creates one instance of the type <code>Person</code>. <br>Calling it twice
+                creates two distinct objects with their
+                own instance fields.</p>
+            </div>
+          </div>
+          <section class="practice-card" data-exercise="person_class">
+            <div class="activity-tags"><span>EXAMPLE 01 · PREDICT → RUN → MODIFY</span><span>DartPad / local SDK</span>
+            </div>
+            <h3>01 · Create two Person instances</h3>
+            <p>Predict whether modifying one object changes the other. Create two instances from the same class.</p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Person Class</span><button data-copy="person_class"
+                  type="button">Copy code</button></div>
+              <pre class="code-sample"><code>class Person {
+  String name = 'Unknown';
+  int age = 0;
+
+  void greet() =&gt; print('Hello, I am $name.');
+}
+
+void main() {
+  final first = Person()..name = 'Laila'..age = 20;
+  final second = Person()..name = 'Nadia'..age = 24;
+  first.greet();
+  second.greet();
+  print('Same object? ${identical(first, second)}');
+  // TODO: Change only second.name. Does first.name change?
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Your task:</strong> Change <code>second.name</code> and call
+              <code>greet()</code> again.
+            </div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p>Each instance has its own instance fields; <code>identical(first, second)</code> is false.</p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p>The same class is a blueprint, not a single shared object.</p>
+            </details>
+            <details class="hint s05-solution">
+              <summary>Reveal exercise solution / explanation</summary>
+              <p><code>second.name = 'Mona'; second.greet();</code> Only the second instance changes.</p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad" data-activity="person_class"
+                type="button">▶ Load DartPad editor</button><a class="ghost-button external-dartpad"
+                data-activity="person_class" href="https://dartpad.dev/" rel="noopener noreferrer" target="_blank">Open
+                in DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="person_class">
+              <p class="embed-status">Your editor loads here on click after Gist publishing. Until then, use
+                <strong>Copy code</strong> and paste into DartPad. All examples work locally without Gists.
+              </p>
+            </div>
+          </section>
+          <div class="s04-live-lab"><span class="kicker">LIVE · TWO INSTANCES</span>
+            <h3>Inspect independent object state</h3>
+            <p>Click an object, then change its name. The other instance should not change.</p>
+            <div class="s04-control-row"><label>Choose object<select id="instanceSelect">
+                  <option value="0">Person A</option>
+                  <option value="1">Person B</option>
+                </select></label><label>New name<input id="instanceName" maxlength="32" value="Laila" /></label></div>
+            <div class="s04-sim-actions"><button id="instanceRename" type="button">Apply name</button><button
+                class="s04-quiet" id="instanceReset" type="button">Reset</button></div>
+            <p class="s04-sim-result" id="instanceResult" role="status">Person A: Laila · Person B: Nadia</p>
+          </div>
+        </section>
+        <section class="lesson-step" data-step="2" hidden="" id="section-3">
+          <div class="section-top"><span class="overline">STEP 03 · FIELDS, METHODS AND THIS</span><span
+              class="duration">GUIDED LAB</span></div>
+          <h1 class="section-heading">Fields hold state. Methods change it.</h1>
+          <p class="lede">The BankAccount example from Chapter 6 shows why methods should apply business rules rather
+            than leaving every field unrestricted.</p>
+          <div class="concept-card s05-talk">
+            <div class="concept-mascot"><img alt="" decoding="async" loading="eager"
+                src="images/dash-study-mascot.webp" /></div>
+            <div class="concept-speech">
+              <h3>State is not behavior.</h3>
+              <p>Fields store <em>what the object knows</em>; methods define <em>what it does</em>. <br>Instance
+                methods operate on the fields of the object they are called on. Methods called on the same
+                object can read or modify its shared state, while different objects maintain their own instance state.
+
+              </p>
+            </div>
+          </div>
+          <div class="s04-compare-grid s04-two">
+            <article class=""><span class="kicker">FIELD</span>
+              <h3>Stored state</h3>
+              <p><code>double balance = 0;</code> belongs to each BankAccount instance.</p>
+            </article>
+            <article class=""><span class="kicker">METHOD</span>
+              <h3>Behavior with rules</h3>
+              <p><code>withdraw(amount)</code> checks the balance before subtracting.</p>
+            </article>
+          </div>
+          <section class="practice-card" data-exercise="fields_methods">
+            <div class="activity-tags"><span>EXAMPLE 02 · PREDICT → RUN → MODIFY</span><span>DartPad / local SDK</span>
+            </div>
+            <h3>02 · State and behavior in BankAccount</h3>
+            <p>Trace deposit and withdraw; see how methods operate on the same object.</p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Fields Methods</span><button data-copy="fields_methods"
+                  type="button">Copy code</button></div>
+              <pre class="code-sample"><code>class BankAccount {
+  double balance = 0;
+
+  void deposit(double amount) {
+    if (amount &gt; 0) balance += amount;
+  }
+
+  void withdraw(double amount) {
+    if (amount &gt; 0 &amp;&amp; amount &lt;= balance) {
+      balance -= amount;
+    } else {
+      print('Withdrawal rejected.');
+    }
+  }
+
+  void displayBalance() =&gt; print('Balance: ${balance.toStringAsFixed(2)}');
+}
+
+void main() {
+  final account = BankAccount();
+  account.deposit(100);
+  account.withdraw(35);
+  account.displayBalance();
+  // TODO: Try withdrawing 100 and explain the result.
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Your task:</strong> Try <code>account.withdraw(100)</code> after the
+              initial transactions.</div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p>Balance becomes 65.00, and an excessive withdrawal is rejected.</p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p>The method checks <code>amount &lt;= balance</code> before subtracting.</p>
+            </details>
+            <details class="hint s05-solution">
+              <summary>Reveal exercise solution / explanation</summary>
+              <p>A withdrawal above the available balance prints <code>Withdrawal rejected.</code> and leaves the
+                balance unchanged.</p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad" data-activity="fields_methods"
+                type="button">▶ Load DartPad editor</button><a class="ghost-button external-dartpad"
+                data-activity="fields_methods" href="https://dartpad.dev/" rel="noopener noreferrer"
+                target="_blank">Open in DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="fields_methods">
+              <p class="embed-status">Your editor loads here on click after Gist publishing. Until then, use
+                <strong>Copy code</strong> and paste into DartPad. All examples work locally without Gists.
+              </p>
+            </div>
+          </section>
+          <div class="mini-challenge"><strong>C# transfer:</strong> Think about a C# instance field and an instance
+            method. What changes when you spell the same model using Dart? Most semantics are familiar; the keywords and
+            syntax differ.</div>
+        </section>
+        <section class="lesson-step" data-step="3" hidden="" id="section-4">
+          <div class="section-top"><span class="overline">STEP 04 · CONSTRUCTOR FOUNDATIONS</span><span
+              class="duration">GUIDED LAB</span></div>
+          <h1 class="section-heading">Constructors: unnamed, shorthand and named</h1>
+          <p class="lede">Chapter 6 introduces default and parameterized constructors, initializing-formal shorthand,
+            named constructors and initializer lists.</p>
+          <div class="s04-compare-grid">
+            <article class=""><span class="kicker">DEFAULT</span>
+              <h3>No explicit constructor</h3>
+              <p>A class without a declared constructor receives an unnamed zero-argument constructor.</p>
+            </article>
+            <article class="s04-focus-card"><span class="kicker">INITIALIZING FORMALS</span>
+              <h3><code>Car(this.brand, ...)</code></h3>
+              <p>Dart assigns constructor parameters directly into instance fields before the body runs.</p>
+            </article>
+            <article class=""><span class="kicker">NAMED</span>
+              <h3><code>Point.origin()</code></h3>
+              <p>Named constructors provide alternative, descriptive creation routes, without C#-style constructor
+                overloads.</p>
+            </article>
+          </div>
+          <div class="concept-card s05-talk">
+            <div class="concept-mascot"><img alt="" decoding="async" loading="eager"
+                src="images/dash-study-mascot.webp" /></div>
+            <div class="concept-speech">
+              <h3>Read the constructor from left to right.</h3>
+
+              <p>In Dart, <code>this</code> names the current instance when
+                clarification is needed.<br>
+                <code>Car(this.brand, this.model, this.year)</code> is shortened initialization, not a call to three
+                methods. <code>Point.origin() : x = 0, y = 0</code> initializes two fields using an initializer list.
+              </p>
+            </div>
+          </div>
+          <section class="practice-card" data-exercise="constructor_shorthand">
+            <div class="activity-tags"><span>EXAMPLE 03 · PREDICT → RUN → MODIFY</span><span>DartPad / local SDK</span>
+            </div>
+            <h3>03 · Initializing-formal constructor</h3>
+            <p>Locate the fields initialized by <code>this.brand</code>, <code>this.model</code> and
+              <code>this.year</code>.
+            </p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Constructor Shorthand</span><button
+                  data-copy="constructor_shorthand" type="button">Copy code</button></div>
+              <pre class="code-sample"><code>class Car {
+  final String brand;
+  final String model;
+  int year;
+
+  Car(this.brand, this.model, this.year);
+
+  void info() =&gt; print('$year $brand $model');
+}
+
+void main() {
+  final car = Car('Toyota', 'Corolla', 2025);
+  car.info();
+  car.year = 2026;
+  car.info();
+  // TODO: Try reassigning brand. Why is this not allowed?
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Your task:</strong> Try changing <code>car.brand</code> and explain the
+              analyzer error.</div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p>The constructor receives values and initializes non-nullable fields; <code>final</code> fields cannot
+                be reassigned.</p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p>An initializing formal assigns directly to a field before the constructor body runs.</p>
+            </details>
+            <details class="hint s05-solution">
+              <summary>Reveal exercise solution / explanation</summary>
+              <p><code>year</code> is mutable, but <code>brand</code> and <code>model</code> are <code>final</code>;
+                removing <code>final</code> would permit reassignment.</p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad"
+                data-activity="constructor_shorthand" type="button">▶ Load DartPad editor</button><a
+                class="ghost-button external-dartpad" data-activity="constructor_shorthand" href="https://dartpad.dev/"
+                rel="noopener noreferrer" target="_blank">Open in DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="constructor_shorthand">
+              <p class="embed-status">Your editor loads here on click after Gist publishing. Until then, use
+                <strong>Copy code</strong> and paste into DartPad. All examples work locally without Gists.
+              </p>
+            </div>
+          </section>
+          <section class="practice-card" data-exercise="named_constructors">
+            <div class="activity-tags"><span>EXAMPLE 04 · PREDICT → RUN → MODIFY</span><span>DartPad / local SDK</span>
+            </div>
+            <h3>04 · Different routes to a Point</h3>
+            <p>Predict the coordinates created with <code>Point.origin()</code> and <code>Point.fromList()</code>.</p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Named Constructors</span><button data-copy="named_constructors"
+                  type="button">Copy code</button></div>
+              <pre class="code-sample"><code>class Point {
+  final double x;
+  final double y;
+
+  Point(this.x, this.y);
+  Point.origin() : x = 0, y = 0;
+  Point.fromList(List&lt;double&gt; coordinates)
+      : x = coordinates[0], y = coordinates[1];
+
+  String label() =&gt; '($x, $y)';
+}
+
+void main() {
+  print(Point(3, 4).label());
+  print(Point.origin().label());
+  print(Point.fromList([7, 8]).label());
+  // TODO: Create Point.fromList([10, 12]).
+  // Challenge: What happens when the input List has one item?
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Your task:</strong> Create a point from <code>[10, 12]</code> and
+              identify the List-size assumption.</div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p>Named constructors offer named creation paths; initializer lists assign non-nullable fields before the
+                body.</p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p>A named constructor has the form <code>ClassName.name(...)</code>.</p>
+            </details>
+            <details class="hint s05-solution">
+              <summary>Reveal exercise solution / explanation</summary>
+              <p><code>Point.fromList([10, 12]).label()</code> prints <code>(10.0, 12.0)</code>. A one-item List causes
+                a range error.</p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad" data-activity="named_constructors"
+                type="button">▶ Load DartPad editor</button><a class="ghost-button external-dartpad"
+                data-activity="named_constructors" href="https://dartpad.dev/" rel="noopener noreferrer"
+                target="_blank">Open in DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="named_constructors">
+              <p class="embed-status">Your editor loads here on click after Gist publishing. Until then, use
+                <strong>Copy code</strong> and paste into DartPad. All examples work locally without Gists.
+              </p>
+            </div>
+          </section>
+          <div class="s04-live-lab"><span class="kicker">LIVE · CONSTRUCTOR TIMELINE</span>
+            <h3>Follow the creation of Point.origin()</h3>
+            <p>Advance through the phases to see how a named constructor initializes its non-nullable fields.</p>
+            <ol class="s04-trace-list" id="constructorTrace">
+              <li>Object construction requested: Point.origin()</li>
+            </ol>
+            <div class="s04-sim-actions"><button id="constructorNext" type="button">Next phase</button><button
+                class="s04-quiet" id="constructorReset" type="button">Start over</button></div>
+          </div>
+        </section>
+        <section class="lesson-step" data-step="4" hidden="" id="section-5">
+          <div class="section-top"><span class="overline">STEP 05 · INITIALIZATION AND NULL SAFETY</span><span
+              class="duration">GUIDED LAB</span></div>
+          <h1 class="section-heading">Initialize safely before using the object</h1>
+          <p class="lede">Carry forward what students learned about nullable types and final/const: those rules also
+            govern Dart class fields.</p>
+          <div class="concept-card s05-talk">
+            <div class="concept-mascot"><img alt="" decoding="async" loading="eager"
+                src="images/dash-study-mascot.webp" /></div>
+            <div class="concept-speech">
+              <h3>Null safety applies to fields, too.</h3>
+              <p>A non-nullable instance field must be initialized through a valid path before object construction
+                finishes; <code>this.x</code> and initializer lists are common. Use <code>String?</code> when null is
+                genuinely allowed; <code>late</code> postpones initialization and requires care.</p>
+            </div>
+          </div>
+          <div class="s04-compare-grid">
+            <article class="s04-focus-card"><span class="kicker">NON-NULLABLE</span>
+              <h3><code>final String name</code></h3>
+              <p>Must be initialized once. A constructor can compute and assign it in its initializer list.</p>
+            </article>
+            <article class=""><span class="kicker">NULLABLE</span>
+              <h3><code>String? researchTopic</code></h3>
+              <p>May hold null. The <code>??</code> operator supplies a useful fallback.</p>
+            </article>
+            <article class=""><span class="kicker">CONST OBJECT</span>
+              <h3><code>const CourseTag(...)</code></h3>
+              <p>Final immutable fields and a const constructor allow compile-time constant instances.</p>
+            </article>
+          </div>
+          <section class="practice-card" data-exercise="initializers">
+            <div class="activity-tags"><span>EXAMPLE 05 · PREDICT → RUN → MODIFY</span><span>DartPad / local SDK</span>
+            </div>
+            <h3>05 · Null-safe fields and initializer lists</h3>
+            <p>Observe how <code>rawName.trim()</code> initializes a final field and how an optional field uses a
+              fallback.</p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Initializers</span><button data-copy="initializers"
+                  type="button">Copy code</button></div>
+              <pre class="code-sample"><code>class Student {
+  final String name;
+  final int id;
+  String? researchTopic; // optional information can be null
+
+  Student(String rawName, int id)
+      : name = rawName.trim(),
+        id = id;
+
+  String description() =&gt; '$name (#$id) · ${researchTopic ?? 'No topic yet'}';
+}
+
+void main() {
+  final student = Student('  Laila  ', 1001);
+  print(student.description());
+  student.researchTopic = 'Mobile Apps';
+  print(student.description());
+  // TODO: Remove the topic and observe the fallback value.
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Your task:</strong> Set <code>student.researchTopic = null</code> after
+              setting it.</div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p>The final field is initialized before the body; the nullable field can later be null; <code>??</code>
+                supplies text.</p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p>Non-nullable instance fields must have a safe initialization path.</p>
+            </details>
+            <details class="hint s05-solution">
+              <summary>Reveal exercise solution / explanation</summary>
+              <p><code>student.researchTopic = null;</code> makes <code>description()</code> display
+                <code>No topic yet</code>.
+              </p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad" data-activity="initializers"
+                type="button">▶ Load DartPad editor</button><a class="ghost-button external-dartpad"
+                data-activity="initializers" href="https://dartpad.dev/" rel="noopener noreferrer" target="_blank">Open
+                in DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="initializers">
+              <p class="embed-status">Your editor loads here on click after Gist publishing. Until then, use
+                <strong>Copy code</strong> and paste into DartPad. All examples work locally without Gists.
+              </p>
+            </div>
+          </section>
+          <section class="practice-card" data-exercise="const_classes">
+            <div class="activity-tags"><span>EXAMPLE 06 · PREDICT → RUN → MODIFY</span><span>DartPad / local SDK</span>
+            </div>
+            <h3>06 · Compile-time constant objects</h3>
+            <p>Compare two identical const constructor calls.</p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Const Classes</span><button data-copy="const_classes"
+                  type="button">Copy code</button></div>
+              <pre class="code-sample"><code>class CourseTag {
+  final String code;
+  final String title;
+
+  const CourseTag(this.code, this.title);
+}
+
+void main() {
+  const first = CourseTag('SICT235', 'Flutter');
+  const second = CourseTag('SICT235', 'Flutter');
+  print(identical(first, second)); // identical const objects
+  print(first.title);
+  // TODO: Why can't you change first.title?
+  // Compare a const object with a final reference to a mutable object.
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Your task:</strong> Explain why <code>first.title = 'New'</code> is
+              invalid.</div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p>Const instances with identical arguments are canonicalized; final fields cannot be reassigned.</p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p>A <code>const</code> constructor requires compatible final instance fields.</p>
+            </details>
+            <details class="hint s05-solution">
+              <summary>Reveal exercise solution / explanation</summary>
+              <p><code>identical(first, second)</code> is true here. The field is <code>final</code>, and the object is
+                const.</p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad" data-activity="const_classes"
+                type="button">▶ Load DartPad editor</button><a class="ghost-button external-dartpad"
+                data-activity="const_classes" href="https://dartpad.dev/" rel="noopener noreferrer" target="_blank">Open
+                in DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="const_classes">
+              <p class="embed-status">Your editor loads here on click after Gist publishing. Until then, use
+                <strong>Copy code</strong> and paste into DartPad. All examples work locally without Gists.
+              </p>
+            </div>
+          </section>
+          <div class="mini-challenge"><strong>Check the edge case:</strong> <code>late String code;</code> postpones
+            initialization, but reading it before assignment can throw a <code>LateInitializationError</code>. It does
+            not disable the need to initialize a value safely.</div>
+        </section>
+        <section class="lesson-step" data-step="5" hidden="" id="section-6">
+          <div class="section-top"><span class="overline">STEP 06 · ENCAPSULATION AND PRIVACY</span><span
+              class="duration">GUIDED LAB</span></div>
+          <h1 class="section-heading">Protect state using getters and setters</h1>
+          <p class="lede">Chapter 6 uses a Book/Student model to demonstrate private fields, controlled access and
+            setter validation.</p>
+          <div class="concept-card s05-talk">
+            <div class="concept-mascot"><img alt="" decoding="async" loading="eager"
+                src="images/dash-study-mascot.webp" /></div>
+            <div class="concept-speech">
+              <h3>Important C# difference: the boundary is a library.</h3>
+              <p>In Dart, <code>_price</code> is not class-private; it is <strong>library-private</strong>. Another
+                class in the same library can access it, while a different importing library cannot. Getters and setters
+                offer a deliberate public API. Do not promise that an underscore hides data from code in the same file.
+              </p>
+            </div>
+          </div>
+          <div class="s04-compare-grid s04-two">
+            <article class=""><span class="kicker">C#</span>
+              <h3>Access modifiers</h3>
+              <p><code>private</code>, <code>public</code>, and properties define member access.</p>
+            </article>
+            <article class="s04-focus-card"><span class="kicker">DART</span>
+              <h3>Underscore privacy</h3>
+              <p><code>_price</code> is library-private; <code>get price</code> and <code>set price</code> expose
+                managed access.</p>
+            </article>
+          </div>
+          <section class="practice-card" data-exercise="getters_setters">
+            <div class="activity-tags"><span>EXAMPLE 07 · PREDICT → RUN → MODIFY</span><span>DartPad / local SDK</span>
+            </div>
+            <h3>07 · Book validation through a setter</h3>
+            <p>Predict the title and price after passing invalid values.</p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Getters Setters</span><button data-copy="getters_setters"
+                  type="button">Copy code</button></div>
+              <pre class="code-sample"><code>class Book {
+  String _title;
+  double _price;
+
+  Book(this._title, this._price);
+
+  String get title =&gt; _title;
+  set title(String newTitle) {
+    if (newTitle.trim().isNotEmpty) _title = newTitle.trim();
+  }
+
+  double get price =&gt; _price;
+  set price(double value) =&gt; _price = value &lt; 0 ? 0 : value;
+
+  void displayInfo() =&gt; print('$title · \$${price.toStringAsFixed(2)}');
+}
+
+void main() {
+  final book = Book('Dart Essentials', 19.99);
+  book.displayInfo();
+  book.price = -4;
+  book.title = '';
+  book.displayInfo();
+  // TODO: Give the book a valid title and a positive price.
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Your task:</strong> Change both fields to valid values using their
+              setters.</div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p>The invalid price becomes zero; the blank title is ignored; getter syntax reads like a property.</p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p>A setter can reject or normalize invalid values before they enter the object.</p>
+            </details>
+            <details class="hint s05-solution">
+              <summary>Reveal exercise solution / explanation</summary>
+              <p><code>book.title = 'Flutter Basics'; book.price = 15.5;</code> yields the updated title and price.</p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad" data-activity="getters_setters"
+                type="button">▶ Load DartPad editor</button><a class="ghost-button external-dartpad"
+                data-activity="getters_setters" href="https://dartpad.dev/" rel="noopener noreferrer"
+                target="_blank">Open in DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="getters_setters">
+              <p class="embed-status">Your editor loads here on click after Gist publishing. Until then, use
+                <strong>Copy code</strong> and paste into DartPad. All examples work locally without Gists.
+              </p>
+            </div>
+          </section>
+          <div class="s04-live-lab"><span class="kicker">LIVE · SETTER VALIDATION</span>
+            <h3>What happens when a price is negative?</h3>
+            <p>This JavaScript visualization illustrates the logic of the Book setter; the DartPad example is the
+              executable Dart version.</p>
+            <div class="s04-control-row"><label>Attempted new price<input id="priceInput" step="1" type="number"
+                  value="-5" /></label></div>
+            <div class="s04-sim-actions"><button id="priceApply" type="button">Apply through setter</button></div>
+            <p class="s04-sim-result" id="priceResult" role="status">Book.price is 19.99 before the change.</p>
+          </div>
+          <section class="practice-card" data-exercise="privacy_library">
+            <div class="activity-tags"><span>EXAMPLE 08 · PREDICT → RUN → MODIFY</span><span>DartPad / local SDK</span>
+            </div>
+            <h3>08 · The underscore is library-private</h3>
+            <p>Predict whether another class in the same Dart file can access <code>_internalCode</code>.</p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Privacy Library</span><button data-copy="privacy_library"
+                  type="button">Copy code</button></div>
+              <pre class="code-sample"><code>// In one Dart library, the underscore does NOT mean class-private.
+class Book {
+  String _internalCode = 'BK-101';
+  String get code =&gt; _internalCode;
+}
+
+class BookInspector {
+  void inspect(Book book) {
+    print(book._internalCode); // Works: same library.
+  }
+}
+
+void main() {
+  final book = Book();
+  BookInspector().inspect(book);
+  print(book.code);
+  // TODO: Explain what changes if Book lives in an imported file.
+  // Read reference/privacy-across-files/ for the two-file example.
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Your task:</strong> Compare this single-file example with
+              <code>reference/privacy-across-files/</code>.
+            </div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p>The same-library access compiles; a separate importing library cannot access
+                <code>_internalCode</code>.
+              </p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p>Dart privacy is enforced by the library boundary, not by the class boundary.</p>
+            </details>
+            <details class="hint s05-solution">
+              <summary>Reveal exercise solution / explanation</summary>
+              <p><code>BookInspector</code> can read the private field here. In a second imported library, only
+                <code>book.code</code> is accessible.
+              </p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad" data-activity="privacy_library"
+                type="button">▶ Load DartPad editor</button><a class="ghost-button external-dartpad"
+                data-activity="privacy_library" href="https://dartpad.dev/" rel="noopener noreferrer"
+                target="_blank">Open in DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="privacy_library">
+              <p class="embed-status">Your editor loads here on click after Gist publishing. Until then, use
+                <strong>Copy code</strong> and paste into DartPad. All examples work locally without Gists.
+              </p>
+            </div>
+          </section>
+          <div class="s05-note"><strong>Two-file reference:</strong> Open
+            <code>reference/privacy-across-files/book.dart</code> and <code>main.dart</code> in the package to see
+            actual library boundaries. This multi-file reference is intended for the local Dart SDK rather than a single
+            DartPad editor.
+          </div>
+        </section>
+        <section class="lesson-step" data-step="6" hidden="" id="section-7">
+          <div class="section-top"><span class="overline">STEP 07 · INHERITANCE AND SUPER</span><span
+              class="duration">GUIDED LAB</span></div>
+          <h1 class="section-heading">Reuse what belongs to a parent class</h1>
+          <p class="lede">The Chapter 7 Person → Student example explains inheritance, constructor forwarding and newer
+            super-parameters.</p>
+          <div class="s04-compare-grid">
+            <article class=""><span class="kicker">BASE CLASS</span>
+              <h3><code>Person</code></h3>
+              <p>Owns name, age and introduce(). Its constructor initializes its own fields.</p>
+            </article>
+            <article class="s04-focus-card"><span class="kicker">DERIVED CLASS</span>
+              <h3><code>Student extends Person</code></h3>
+              <p>Adds major and study(). Calls its parent constructor through super.</p>
+            </article>
+            <article class=""><span class="kicker">SHORT HAND</span>
+              <h3><code>super.name</code></h3>
+              <p>Super-parameters forward constructor arguments without repeating boilerplate.</p>
+            </article>
+          </div>
+          <div aria-label="Student extends Person. Person owns shared properties; Student adds major and study."
+            class="s05-hierarchy" role="img">
+            <div class="s05-node s05-parent"><strong>Person</strong><small>name · age · introduce()</small></div><span
+              class="s05-branch">↑ extends</span>
+            <div class="s05-node s05-child"><strong>Student</strong><small>major · study()</small></div>
+          </div>
+          <div class="concept-card s05-talk">
+            <div class="concept-mascot"><img alt="" decoding="async" loading="eager"
+                src="images/dash-study-mascot.webp" /></div>
+            <div class="concept-speech">
+              <h3>Who initializes the inherited fields?</h3>
+              <p><code>Person</code> is responsible for its own fields. A <code>Student</code> constructor passes the
+                needed data using <code>: super(name, age)</code>, or the modern shorthand <code>super.name</code>.</p>
+            </div>
+          </div>
+          <section class="practice-card" data-exercise="extends_person">
+            <div class="activity-tags"><span>EXAMPLE 09 · PREDICT → RUN → MODIFY</span><span>DartPad / local SDK</span>
+            </div>
+            <h3>09 · Student extends Person</h3>
+            <p>Follow which class owns each field and method.</p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Extends Person</span><button data-copy="extends_person"
+                  type="button">Copy code</button></div>
+              <pre class="code-sample"><code>class Person {
+  final String name;
+  final int age;
+  Person(this.name, this.age);
+
+  void introduce() =&gt; print('I am $name, age $age.');
+}
+
+class Student extends Person {
+  final String major;
+  Student(String name, int age, this.major) : super(name, age);
+
+  void study() =&gt; print('$name studies $major.');
+}
+
+void main() {
+  final student = Student('Laila', 20, 'Computer Science');
+  student.introduce(); // inherited
+  student.study();     // own method
+  // TODO: Add a second Student with another major.
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Your task:</strong> Add a second Student and call both inherited and own
+              methods.</div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p>Student inherits Person members and adds major and study. The parent initializes name and age.</p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p>A subclass can initialize its own fields and forward data to a superclass constructor.</p>
+            </details>
+            <details class="hint s05-solution">
+              <summary>Reveal exercise solution / explanation</summary>
+              <p><code>Student('Nadia', 22, 'Software')..introduce()..study();</code> calls both methods.</p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad" data-activity="extends_person"
+                type="button">▶ Load DartPad editor</button><a class="ghost-button external-dartpad"
+                data-activity="extends_person" href="https://dartpad.dev/" rel="noopener noreferrer"
+                target="_blank">Open in DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="extends_person">
+              <p class="embed-status">Your editor loads here on click after Gist publishing. Until then, use
+                <strong>Copy code</strong> and paste into DartPad. All examples work locally without Gists.
+              </p>
+            </div>
+          </section>
+          <section class="practice-card" data-exercise="super_parameters">
+            <div class="activity-tags"><span>EXAMPLE 10 · PREDICT → RUN → MODIFY</span><span>DartPad / local SDK</span>
+            </div>
+            <h3>10 · Read the super-parameter shorthand</h3>
+            <p>Compare <code>Student(super.name, super.id, this.major)</code> to a traditional constructor.</p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Super Parameters</span><button data-copy="super_parameters"
+                  type="button">Copy code</button></div>
+              <pre class="code-sample"><code>class Person {
+  final String name;
+  final int id;
+  Person(this.name, this.id);
+}
+
+class Student extends Person {
+  final String major;
+
+  // Short form of forwarding arguments to the parent constructor.
+  Student(super.name, super.id, this.major);
+
+  void summary() =&gt; print('$name (#$id) · $major');
+}
+
+void main() {
+  Student('Nadia', 2002, 'Database').summary();
+  // TODO: Rewrite the constructor using : super(name, id).
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Your task:</strong> Rewrite the constructor using an explicit
+              <code>: super(...)</code> call.
+            </div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p>Both constructor forms forward arguments to Person; each class initializes its own fields.</p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p><code>super.name</code> is a forwarded constructor parameter, not a field assignment in Student.</p>
+            </details>
+            <details class="hint s05-solution">
+              <summary>Reveal exercise solution / explanation</summary>
+              <p><code>Student(String name, int id, this.major) : super(name, id);</code> is equivalent.</p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad" data-activity="super_parameters"
+                type="button">▶ Load DartPad editor</button><a class="ghost-button external-dartpad"
+                data-activity="super_parameters" href="https://dartpad.dev/" rel="noopener noreferrer"
+                target="_blank">Open in DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="super_parameters">
+              <p class="embed-status">Your editor loads here on click after Gist publishing. Until then, use
+                <strong>Copy code</strong> and paste into DartPad. All examples work locally without Gists.
+              </p>
+            </div>
+          </section>
+        </section>
+        <section class="lesson-step" data-step="7" hidden="" id="section-8">
+          <div class="section-top"><span class="overline">STEP 08 · OVERRIDING AND POLYMORPHISM</span><span
+              class="duration">GUIDED LAB</span></div>
+          <h1 class="section-heading">One interface, many behaviors</h1>
+          <p class="lede">Use @override and superclass dispatch to adapt familiar C# virtual/override thinking to Dart.
+          </p>
+          <div class="concept-card s05-talk">
+            <div class="concept-mascot"><img alt="" decoding="async" loading="eager"
+                src="images/dash-study-mascot.webp" /></div>
+            <div class="concept-speech">
+              <h3>Same call, different runtime behavior.</h3>
+              <p>Use <code>@override</code> to customize inherited behavior. Call <code>super.introduce()</code> when
+                you want the parent behavior as well. With polymorphism, a variable typed as the parent can refer to a
+                child object, and the child implementation runs.</p>
+            </div>
+          </div>
+          <div class="s04-compare-grid">
+            <article class=""><span class="kicker">OVERRIDE</span>
+              <h3>Replace behavior</h3>
+              <p>Teacher introduces its subject using the same method name.</p>
+            </article>
+            <article class=""><span class="kicker">SUPER.METHOD()</span>
+              <h3>Extend behavior</h3>
+              <p>Run the parent implementation first, then the subclass-specific behavior.</p>
+            </article>
+            <article class="s04-focus-card"><span class="kicker">POLYMORPHISM</span>
+              <h3>One common type</h3>
+              <p>A <code>List&lt;GameCharacter&gt;</code> holds different derived classes.</p>
+            </article>
+          </div>
+          <section class="practice-card" data-exercise="override_super">
+            <div class="activity-tags"><span>EXAMPLE 11 · PREDICT → RUN → MODIFY</span><span>DartPad / local SDK</span>
+            </div>
+            <h3>11 · Override and extend behavior</h3>
+            <p>Predict the two printed lines from Teacher.introduce().</p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Override Super</span><button data-copy="override_super"
+                  type="button">Copy code</button></div>
+              <pre class="code-sample"><code>class Person {
+  final String name;
+  Person(this.name);
+  void introduce() =&gt; print('Hello, I am $name.');
+}
+
+class Teacher extends Person {
+  final String subject;
+  Teacher(super.name, this.subject);
+
+  @override
+  void introduce() {
+    super.introduce();
+    print('I teach $subject.');
+  }
+}
+
+void main() {
+  final teacher = Teacher('Dr. Ali', 'Biology');
+  teacher.introduce();
+  // TODO: Remove super.introduce() and predict the change.
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Your task:</strong> Remove the call to <code>super.introduce()</code>
+              and run again.</div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p>The child override executes and optionally reuses its parent method.</p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p><code>@override</code> documents intent; <code>super.method()</code> calls the parent implementation.
+              </p>
+            </details>
+            <details class="hint s05-solution">
+              <summary>Reveal exercise solution / explanation</summary>
+              <p>Without <code>super.introduce()</code>, only the teacher-specific line appears.</p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad" data-activity="override_super"
+                type="button">▶ Load DartPad editor</button><a class="ghost-button external-dartpad"
+                data-activity="override_super" href="https://dartpad.dev/" rel="noopener noreferrer"
+                target="_blank">Open in DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="override_super">
+              <p class="embed-status">Your editor loads here on click after Gist publishing. Until then, use
+                <strong>Copy code</strong> and paste into DartPad. All examples work locally without Gists.
+              </p>
+            </div>
+          </section>
+          <section class="practice-card" data-exercise="polymorphism">
+            <div class="activity-tags"><span>EXAMPLE 13 · PREDICT → RUN → MODIFY</span><span>DartPad / local SDK</span>
+            </div>
+            <h3>13 · One list, different implementations</h3>
+            <p>Predict the output of the loop over <code>List&lt;GameCharacter&gt;</code>.</p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Polymorphism</span><button data-copy="polymorphism"
+                  type="button">Copy code</button></div>
+              <pre class="code-sample"><code>abstract class GameCharacter {
+  final String name;
+  GameCharacter(this.name);
+  void attack();
+}
+
+class Warrior extends GameCharacter {
+  Warrior(super.name);
+  @override
+  void attack() =&gt; print('$name uses a sword.');
+}
+
+class Archer extends GameCharacter {
+  Archer(super.name);
+  @override
+  void attack() =&gt; print('$name uses a bow.');
+}
+
+void main() {
+  final List&lt;GameCharacter&gt; team = [Warrior('Thor'), Archer('Robin')];
+  for (final character in team) {
+    character.attack(); // same call, different implementation
+  }
+  // TODO: Add another Archer to the list.
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Your task:</strong> Add another Archer to the List.</div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p>Each element exposes the shared type, but its own override runs when attack() is called.</p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p>The declared type can be the superclass while the actual object is a subclass.</p>
+            </details>
+            <details class="hint s05-solution">
+              <summary>Reveal exercise solution / explanation</summary>
+              <p><code>team.add(Archer('Mina'));</code> adds another implementation that works in the same loop.</p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad" data-activity="polymorphism"
+                type="button">▶ Load DartPad editor</button><a class="ghost-button external-dartpad"
+                data-activity="polymorphism" href="https://dartpad.dev/" rel="noopener noreferrer" target="_blank">Open
+                in DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="polymorphism">
+              <p class="embed-status">Your editor loads here on click after Gist publishing. Until then, use
+                <strong>Copy code</strong> and paste into DartPad. All examples work locally without Gists.
+              </p>
+            </div>
+          </section>
+        </section>
+        <section class="lesson-step" data-step="8" hidden="" id="section-9">
+          <div class="section-top"><span class="overline">STEP 09 · ABSTRACT CLASSES</span><span class="duration">GUIDED
+              LAB</span></div>
+          <h1 class="section-heading">Specify what every subclass must provide</h1>
+          <p class="lede">Chapter 7 introduces GameCharacter, Warrior and Archer: shared methods alongside required
+            attack() implementations.</p>
+          <div class="concept-card s05-talk">
+            <div class="concept-mascot"><img alt="" decoding="async" loading="eager"
+                src="images/dash-study-mascot.webp" /></div>
+            <div class="concept-speech">
+              <h3>Abstract does not mean empty.</h3>
+              <p>An <code>abstract class</code> may provide shared implemented methods and also declare abstract methods
+                without bodies. Every concrete subclass must implement the required ones. You cannot construct the
+                abstract type directly.</p>
+            </div>
+          </div>
+          <div class="s04-compare-grid s04-two">
+            <article class=""><span class="kicker">ABSTRACT METHOD</span>
+              <h3><code>void attack();</code></h3>
+              <p>A concrete derived class must supply the behavior.</p>
+            </article>
+            <article class=""><span class="kicker">CONCRETE METHOD</span>
+              <h3><code>showHealth()</code></h3>
+              <p>Already implemented in the abstract parent and reused by subclasses.</p>
+            </article>
+          </div>
+          <section class="practice-card" data-exercise="abstract_characters">
+            <div class="activity-tags"><span>EXAMPLE 12 · PREDICT → RUN → MODIFY</span><span>DartPad / local SDK</span>
+            </div>
+            <h3>12 · Shared behavior, required specialization</h3>
+            <p>Identify which method has no body and which has an inherited implementation.</p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Abstract Characters</span><button
+                  data-copy="abstract_characters" type="button">Copy code</button></div>
+              <pre class="code-sample"><code>abstract class GameCharacter {
+  final String name;
+  int health;
+  GameCharacter(this.name, this.health);
+
+  void attack(); // implemented by each concrete subclass
+  void showHealth() =&gt; print('$name: $health HP'); // shared code
+}
+
+class Warrior extends GameCharacter {
+  Warrior(super.name, super.health);
+  @override
+  void attack() =&gt; print('$name swings a sword.');
+}
+
+class Archer extends GameCharacter {
+  Archer(super.name, super.health);
+  @override
+  void attack() =&gt; print('$name shoots an arrow.');
+}
+
+void main() {
+  Warrior('Thor', 100)..attack()..showHealth();
+  Archer('Robin', 80)..attack()..showHealth();
+  // TODO: Why can't we write GameCharacter('X', 50)?
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Your task:</strong> Add another concrete character or change one
+              attack() method.</div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p>An abstract class cannot be instantiated; concrete subclasses implement attack().</p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p>Methods with no implementation in an abstract class must be supplied by concrete subclasses.</p>
+            </details>
+            <details class="hint s05-solution">
+              <summary>Reveal exercise solution / explanation</summary>
+              <p>A third subclass such as <code>class Mage extends GameCharacter</code> must override
+                <code>attack()</code>.
+              </p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad"
+                data-activity="abstract_characters" type="button">▶ Load DartPad editor</button><a
+                class="ghost-button external-dartpad" data-activity="abstract_characters" href="https://dartpad.dev/"
+                rel="noopener noreferrer" target="_blank">Open in DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="abstract_characters">
+              <p class="embed-status">Your editor loads here on click after Gist publishing. Until then, use
+                <strong>Copy code</strong> and paste into DartPad. All examples work locally without Gists.
+              </p>
+            </div>
+          </section>
+          <div class="mini-challenge"><strong>C# connection:</strong> Ask what an abstract C# base class would look like
+            here. Look for shared state and behavior together with required specialization.</div>
+        </section>
+        <section class="lesson-step" data-step="9" hidden="" id="section-10">
+          <div class="section-top"><span class="overline">STEP 10 · INTERFACES AND IMPLEMENTS</span><span
+              class="duration">GUIDED LAB</span></div>
+          <h1 class="section-heading">Agree to a contract without inheriting code</h1>
+          <p class="lede">Chapter 7 compares extends and implements through Animal, Dog and Cat. This is especially
+            useful for understanding interfaces in Flutter and Dart APIs.</p>
+          <div class="s04-compare-grid">
+            <article class=""><span class="kicker">EXTENDS</span>
+              <h3>Inheritance</h3>
+              <p>Get superclass implementation and optionally override it.</p>
+            </article>
+            <article class="s04-focus-card"><span class="kicker">IMPLEMENTS</span>
+              <h3>Contract</h3>
+              <p>Supply all required public members yourself; no implementation is inherited.</p>
+            </article>
+            <article class=""><span class="kicker">C# COMPARISON</span>
+              <h3>Implicit interfaces</h3>
+              <p>Every Dart class defines an implicit interface; explicit <code>interface class</code> modifiers are an
+                additional modern language feature.</p>
+            </article>
+          </div>
+          <div class="concept-card s05-talk">
+            <div class="concept-mascot"><img alt="" decoding="async" loading="eager"
+                src="images/dash-study-mascot.webp" /></div>
+            <div class="concept-speech">
+              <h3>An interface in Dart can begin as an ordinary class.</h3>
+              <p><code>Cat implements Animal</code> must provide the public <code>name</code> property and
+                <code>makeSound()</code> method. This is different from <code>Dog extends Animal</code>, which inherits
+                implementation. Modern Dart also supports explicit <code>abstract interface class</code>; our core
+                example follows Chapter 7.
+              </p>
+            </div>
+          </div>
+          <section class="practice-card" data-exercise="implements_contract">
+            <div class="activity-tags"><span>EXAMPLE 14 · PREDICT → RUN → MODIFY</span><span>DartPad / local SDK</span>
+            </div>
+            <h3>14 · Implements is not extends</h3>
+            <p>Compare the behavior of Dog and Cat; find the members Cat must redeclare.</p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Implements Contract</span><button
+                  data-copy="implements_contract" type="button">Copy code</button></div>
+              <pre class="code-sample"><code>class Animal {
+  String name;
+  Animal(this.name);
+  void makeSound() =&gt; print('$name makes a sound.');
+}
+
+class Dog extends Animal {
+  Dog(super.name); // inherits name and concrete methods
+}
+
+class Cat implements Animal {
+  @override
+  String name;
+  Cat(this.name);
+
+  @override
+  void makeSound() =&gt; print('$name says meow!');
+}
+
+void main() {
+  Animal('Creature').makeSound();
+  Dog('Rex').makeSound();
+  Cat('Mimi').makeSound();
+  // TODO: Comment out Cat.makeSound and note the compile error.
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Your task:</strong> Comment out Cat.makeSound() and observe the analyzer
+              result.</div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p>Dog inherits code; Cat must implement all public Animal interface members.</p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p>With <code>implements</code>, the implementation is not inherited.</p>
+            </details>
+            <details class="hint s05-solution">
+              <summary>Reveal exercise solution / explanation</summary>
+              <p>Cat needs its own <code>name</code> property and <code>makeSound()</code> method to satisfy Animal.</p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad"
+                data-activity="implements_contract" type="button">▶ Load DartPad editor</button><a
+                class="ghost-button external-dartpad" data-activity="implements_contract" href="https://dartpad.dev/"
+                rel="noopener noreferrer" target="_blank">Open in DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="implements_contract">
+              <p class="embed-status">Your editor loads here on click after Gist publishing. Until then, use
+                <strong>Copy code</strong> and paste into DartPad. All examples work locally without Gists.
+              </p>
+            </div>
+          </section>
+        </section>
+        <section class="lesson-step" data-step="10" hidden="" id="section-11">
+          <div class="section-top"><span class="overline">STEP 11 · MIXINS AND THREE RELATIONSHIPS</span><span
+              class="duration">GUIDED LAB</span></div>
+          <h1 class="section-heading">Extend, implement or mix in?</h1>
+          <p class="lede">Chapter 7 teaches capability-based composition with mixins, their on constraints, and reuse of
+            per-object mixin state.</p>
+          <div class="s04-compare-grid">
+            <article class=""><span class="kicker">EXTENDS · IS-A</span>
+              <h3>Class inheritance</h3>
+              <p><code>Duck extends Animal</code>: one superclass.</p>
+            </article>
+            <article class=""><span class="kicker">IMPLEMENTS · CONTRACT</span>
+              <h3>Required API</h3>
+              <p>A type promises to implement all declared public members.</p>
+            </article>
+            <article class="s04-focus-card"><span class="kicker">WITH · CAN-DO</span>
+              <h3>Mixin capability</h3>
+              <p><code>Duck with CanFly, CanSwim</code>: attach reusable behavior.</p>
+            </article>
+          </div>
+          <div class="s05-hierarchy s05-relations">
+            <div class="s05-node s05-parent"><strong>Animal</strong><small>Superclass</small></div><span
+              class="s05-branch">↑ extends</span>
+            <div class="s05-node s05-child"><strong>Duck</strong><small>with CanFly, CanSwim</small></div>
+            <div class="s05-two-nodes"><span class="s05-node s05-cap">CanFly</span><span
+                class="s05-node s05-cap">CanSwim</span></div>
+          </div>
+          <div class="concept-card s05-talk">
+            <div class="concept-mascot"><img alt="" decoding="async" loading="eager"
+                src="images/dash-study-mascot.webp" /></div>
+            <div class="concept-speech">
+              <h3>Mixins help with cross-cutting abilities.</h3>
+              <p>The book introduces <code>CanFly</code>, <code>CanSwim</code> and <code>ActivityLogger</code>. The
+                optional <code>on Animal</code> constraint allows the mixin to rely on the Animal superclass. Mixins can
+                hold per-object state, but cannot have generative constructors.</p>
+            </div>
+          </div>
+          <section class="practice-card" data-exercise="mixin_capabilities">
+            <div class="activity-tags"><span>EXAMPLE 15 · PREDICT → RUN → MODIFY</span><span>DartPad / local SDK</span>
+            </div>
+            <h3>15 · Compose capabilities with mixins</h3>
+            <p>Predict which animals can fly, swim, or do both.</p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Mixin Capabilities</span><button data-copy="mixin_capabilities"
+                  type="button">Copy code</button></div>
+              <pre class="code-sample"><code>class Animal {
+  final String name;
+  Animal(this.name);
+}
+
+mixin CanFly { void fly() =&gt; print('Flying!'); }
+mixin CanSwim { void swim() =&gt; print('Swimming!'); }
+
+class Duck extends Animal with CanFly, CanSwim {
+  Duck(super.name);
+}
+class Eagle extends Animal with CanFly {
+  Eagle(super.name);
+}
+class Fish extends Animal with CanSwim {
+  Fish(super.name);
+}
+
+void main() {
+  final duck = Duck('Donald')..fly()..swim();
+  Eagle('Sam').fly();
+  Fish('Nemo').swim();
+  print(duck.name);
+  // TODO: Why is Eagle('Sam').swim() a compile-time error?
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Your task:</strong> Try calling <code>swim()</code> on Eagle (comment it
+              back out after observing the error).</div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p>A class receives only the mixins listed after <code>with</code>.</p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p>Ask: Is this an is-a relationship or an added ability?</p>
+            </details>
+            <details class="hint s05-solution">
+              <summary>Reveal exercise solution / explanation</summary>
+              <p>Duck can call both; Eagle has only CanFly, and Fish only CanSwim.</p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad" data-activity="mixin_capabilities"
+                type="button">▶ Load DartPad editor</button><a class="ghost-button external-dartpad"
+                data-activity="mixin_capabilities" href="https://dartpad.dev/" rel="noopener noreferrer"
+                target="_blank">Open in DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="mixin_capabilities">
+              <p class="embed-status">Your editor loads here on click after Gist publishing. Until then, use
+                <strong>Copy code</strong> and paste into DartPad. All examples work locally without Gists.
+              </p>
+            </div>
+          </section>
+          <section class="practice-card" data-exercise="mixin_on">
+            <div class="activity-tags"><span>EXAMPLE 16 · PREDICT → RUN → MODIFY</span><span>DartPad / local SDK</span>
+            </div>
+            <h3>16 · A mixin constrained with on</h3>
+            <p>Explain why CanFly can read <code>name</code> inside its own method.</p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Mixin On</span><button data-copy="mixin_on" type="button">Copy
+                  code</button></div>
+              <pre class="code-sample"><code>class Animal {
+  final String name;
+  Animal(this.name);
+}
+
+mixin CanFly on Animal {
+  void fly() =&gt; print('$name is flying!');
+}
+
+class Duck extends Animal with CanFly {
+  Duck(super.name);
+}
+
+void main() {
+  final duck = Duck('Donald');
+  duck.fly();
+  // TODO: Try applying CanFly to a class unrelated to Animal.
+  // The 'on Animal' constraint allows CanFly to use name safely.
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Your task:</strong> Try mixing CanFly into an unrelated class without
+              extending Animal.</div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p>The <code>on Animal</code> clause restricts valid users and makes Animal members available.</p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p>The <code>on</code> constraint describes a required superclass type.</p>
+            </details>
+            <details class="hint s05-solution">
+              <summary>Reveal exercise solution / explanation</summary>
+              <p>A class applying CanFly must satisfy the Animal superclass constraint, as Duck does.</p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad" data-activity="mixin_on"
+                type="button">▶ Load DartPad editor</button><a class="ghost-button external-dartpad"
+                data-activity="mixin_on" href="https://dartpad.dev/" rel="noopener noreferrer" target="_blank">Open in
+                DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="mixin_on">
+              <p class="embed-status">Your editor loads here on click after Gist publishing. Until then, use
+                <strong>Copy code</strong> and paste into DartPad. All examples work locally without Gists.
+              </p>
+            </div>
+          </section>
+          <section class="practice-card" data-exercise="mixin_logging">
+            <div class="activity-tags"><span>EXAMPLE 17 · PREDICT → RUN → MODIFY</span><span>DartPad / local SDK</span>
+            </div>
+            <h3>17 · Mixins may carry per-object state</h3>
+            <p>Predict the log counts for two different SmartFridge objects.</p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · Mixin Logging</span><button data-copy="mixin_logging"
+                  type="button">Copy code</button></div>
+              <pre class="code-sample"><code>mixin ActivityLogger {
+  final List&lt;String&gt; _logs = [];
+  void logActivity(String message) =&gt; _logs.add(message);
+  int get logCount =&gt; _logs.length;
+  void showLogs() =&gt; print(_logs.join(' | '));
+}
+
+class SmartFridge with ActivityLogger {
+  final String brand;
+  SmartFridge(this.brand);
+  void openDoor() =&gt; logActivity('$brand door opened');
+}
+
+void main() {
+  final first = SmartFridge('LG')..openDoor()..openDoor();
+  final second = SmartFridge('Samsung')..openDoor();
+  print('First: ${first.logCount} · Second: ${second.logCount}');
+  first.showLogs();
+  // TODO: Does each object keep its own logs? Explain.
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Your task:</strong> Add another action to one fridge and check which log
+              count changes.</div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p>Each object gets its own mixin fields; the two log lists are independent.</p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p>Instance fields on a mixin are stored on each object using it.</p>
+            </details>
+            <details class="hint s05-solution">
+              <summary>Reveal exercise solution / explanation</summary>
+              <p>The initial counts are 2 and 1; changing the first fridge does not alter the second.</p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad" data-activity="mixin_logging"
+                type="button">▶ Load DartPad editor</button><a class="ghost-button external-dartpad"
+                data-activity="mixin_logging" href="https://dartpad.dev/" rel="noopener noreferrer" target="_blank">Open
+                in DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="mixin_logging">
+              <p class="embed-status">Your editor loads here on click after Gist publishing. Until then, use
+                <strong>Copy code</strong> and paste into DartPad. All examples work locally without Gists.
+              </p>
+            </div>
+          </section>
+          <div class="s04-live-lab"><span class="kicker">LIVE · CHOOSE THE RELATIONSHIP</span>
+            <h3>Which Dart mechanism fits?</h3>
+            <p>Choose a requirement and inspect the relationship before checking the Dart examples.</p>
+            <div class="s04-control-row"><label>Requirement<select id="relationScenario">
+                  <option value="extends">Student is a Person and should reuse Person methods</option>
+                  <option value="implements">Payment handler promises an API with its own implementation</option>
+                  <option value="with">Duck gains flying and swimming behavior</option>
+                </select></label></div>
+            <div class="s04-sim-actions"><button id="relationReveal" type="button">Explain relationship</button></div>
+            <p class="s04-sim-result" id="relationResult" role="status">Select a requirement and reveal the mechanism.
+            </p>
+          </div>
+        </section>
+        <section class="lesson-step" data-step="11" hidden="" id="section-12">
+          <div class="section-top"><span class="overline">STEP 12 · INTEGRATION AND BOOK PRACTICE</span><span
+              class="duration">GUIDED LAB</span></div>
+          <h1 class="section-heading">Put your Dart OOP toolkit together</h1>
+          <p class="lede">Read a university model that combines inheritance, a mixin and an interface, then work on the
+            actual book-based assignments.</p>
+          <section class="practice-card" data-exercise="university_integrated">
+            <div class="activity-tags"><span>EXAMPLE 18 · PREDICT → RUN → MODIFY</span><span>DartPad / local SDK</span>
+            </div>
+            <h3>18 · Read the complete class relationship</h3>
+            <p>Trace the roles of extends, with and implements in the university scenario.</p>
+            <div class="inline-code-box">
+              <div class="code-header"><span>main.dart · University Integrated</span><button
+                  data-copy="university_integrated" type="button">Copy code</button></div>
+              <pre class="code-sample"><code>abstract class Person {
+  final String name;
+  final int id;
+  Person(this.name, this.id);
+  String getRole();
+  void introduce() =&gt; print('$name (#$id) — ${getRole()}');
+}
+
+mixin ActivityLogger {
+  void logActivity(String text) =&gt; print('LOG: $text');
+}
+
+abstract interface class Payable {
+  void processPayment(double amount);
+}
+
+class Student extends Person with ActivityLogger implements Payable {
+  Student(super.name, super.id);
+  @override
+  String getRole() =&gt; 'Student';
+  @override
+  void processPayment(double amount) =&gt; logActivity('$name paid \$$amount');
+}
+
+class Staff extends Person with ActivityLogger implements Payable {
+  Staff(super.name, super.id);
+  @override
+  String getRole() =&gt; 'Staff';
+  @override
+  void processPayment(double amount) =&gt; logActivity('$name received \$$amount');
+}
+
+void main() {
+  final people = &lt;Person&gt;[Student('Laila', 1001), Staff('Ali', 2002)];
+  for (final person in people) { person.introduce(); }
+  final payables = &lt;Payable&gt;[Student('Laila', 1001), Staff('Ali', 2002)];
+  for (final entry in payables) { entry.processPayment(50); }
+  // TODO: Explain the roles of extends, with, implements.
+}
+</code></pre>
+            </div>
+            <div class="mini-challenge"><strong>Your task:</strong> Add a third Person subclass or explain every member
+              in the class header.</div>
+            <div class="expected"><strong>Expected observation</strong>
+              <p>Person provides common behavior, ActivityLogger adds a capability, and Payable is a contract.</p>
+            </div>
+            <details class="hint">
+              <summary>Need a hint?</summary>
+              <p>Read a class declaration left to right: parent → mixin(s) → interface(s).</p>
+            </details>
+            <details class="hint s05-solution">
+              <summary>Reveal exercise solution / explanation</summary>
+              <p><code>Student extends Person with ActivityLogger implements Payable</code> combines all three
+                mechanisms.</p>
+            </details>
+            <div class="exercise-actions"><button class="primary-button load-dartpad"
+                data-activity="university_integrated" type="button">▶ Load DartPad editor</button><a
+                class="ghost-button external-dartpad" data-activity="university_integrated" href="https://dartpad.dev/"
+                rel="noopener noreferrer" target="_blank">Open in DartPad ↗</a></div>
+            <div class="embed-slot" data-activity="university_integrated">
+              <p class="embed-status">Your editor loads here on click after Gist publishing. Until then, use
+                <strong>Copy code</strong> and paste into DartPad. All examples work locally without Gists.
+              </p>
+            </div>
+          </section>
+          <div class="assignment-card"><span class="kicker">BOOK-BASED · CHAPTERS 6–7 · TRY IT YOURSELF</span>
+            <h3>Session 05 Homework — Two practical exercises</h3>
+            <p>These student instructions adapt the <em>Flutter and Dart Fundamentals</em> end-of-chapter activities.
+              Read the book for the full original prompts. Submit <strong>one StudentName.dart</strong> file with a
+              single <code>main()</code> and clearly separated task functions; your work must be original.</p>
+            <ol class="steps-list">
+              <li><strong>Required A · Bookstore Manager (Chapter 6):</strong> Build a Book with private
+                title/author/price, parameterized and freeSample constructors, public getters/setters, price validation
+                and displayInfo().</li>
+              <li><strong>Required B · Student Record System (Chapter 7):</strong> Build Student and GradStudent with
+                private fields, constructors, getters/setters, super and @override.</li>
+              <li><strong>Independent extension:</strong> Use the chapter’s mixin and interface examples to classify
+                <code>extends</code>, <code>with</code> and <code>implements</code>. The extension is not required for
+                submission.
+              </li>
+            </ol>
+            <p><strong>Submission:</strong> One <code>StudentName.dart</code> file through Google Classroom, with a
+              single main(), readable outputs and brief comments. Use DartPad or a local Dart SDK. Instructor answer
+              keys are distributed separately.</p>
+            <div class="s04-download-row"><a class="primary-button" download="" href="assignment/Homework.pdf">↓
+                Homework PDF</a><a class="ghost-button" download="" href="assignment/StudentName.dart">↓ Student Dart
+                starter</a></div>
+          </div>
+          <div class="s04-next"><span class="kicker">NEXT · LECTURE 06</span>
+            <h3>Your first Flutter app — a documentation journey</h3>
+            <p>Our next guided practical allocates <strong>90 minutes</strong> to launching an app, reading
+              <code>main.dart</code>, navigating Flutter API class documentation, and beginning independent Widget
+              Catalog discovery.
+            </p>
+          </div>
+          <div class="completion-message" hidden="" id="completionMessage">
+            <div class="confetti">✦ ✳︎ ✦ ✳︎ ✦</div>
+            <h3>Codelab 05 complete!</h3>
+            <p>You can now read Dart class declarations, constructors, inheritance, interfaces and mixins.</p>
+          </div>
+          <h2 class="session03-small-heading">Exit check · 8 Dart OOP questions</h2>
+          <p class="lede">Unlike the opening diagnostic, this checks concepts taught in the current codelab. You can
+            return after completing both live meetings and the self-paced exercises.</p>
+          <form class="quiz-form" id="exitQuiz">
+            <fieldset class="quiz-item">
+              <legend>1. Which declaration creates an instance of an existing Dart class Person?</legend>
+              <div class="quiz-options"><label class="quiz-choice"><input data-right="true" name="exitQuiz0"
+                    type="radio" value="0" /><span>Person();</span></label><label class="quiz-choice"><input
+                    data-right="false" name="exitQuiz0" type="radio" value="1" /><span>new class
+                    Person;</span></label><label class="quiz-choice"><input data-right="false" name="exitQuiz0"
+                    type="radio" value="2" /><span>instance Person;</span></label></div>
+              <p aria-live="polite" class="quiz-feedback">Choose one option.</p><span class="answer-detail"
+                hidden="">Calling Person() invokes a constructor; the new keyword is optional.</span>
+            </fieldset>
+            <fieldset class="quiz-item">
+              <legend>2. What does Car(this.brand, this.model) do in a Dart constructor?</legend>
+              <div class="quiz-options"><label class="quiz-choice"><input data-right="false" name="exitQuiz1"
+                    type="radio" value="0" /><span>Creates two local functions</span></label><label
+                  class="quiz-choice"><input data-right="true" name="exitQuiz1" type="radio"
+                    value="1" /><span>Initializes the corresponding instance fields</span></label><label
+                  class="quiz-choice"><input data-right="false" name="exitQuiz1" type="radio"
+                    value="2" /><span>Automatically makes the fields static</span></label></div>
+              <p aria-live="polite" class="quiz-feedback">Choose one option.</p><span class="answer-detail"
+                hidden="">Initializing formals assign constructor arguments to instance fields.</span>
+            </fieldset>
+            <fieldset class="quiz-item">
+              <legend>3. Which statement about Dart _price is accurate?</legend>
+              <div class="quiz-options"><label class="quiz-choice"><input data-right="true" name="exitQuiz2"
+                    type="radio" value="0" /><span>It is private to the declaring library</span></label><label
+                  class="quiz-choice"><input data-right="false" name="exitQuiz2" type="radio" value="1" /><span>It is
+                    private only to the declaring class</span></label><label class="quiz-choice"><input
+                    data-right="false" name="exitQuiz2" type="radio" value="2" /><span>It is public to all imported
+                    libraries</span></label></div>
+              <p aria-live="polite" class="quiz-feedback">Choose one option.</p><span class="answer-detail" hidden="">An
+                underscore prefixes library-private identifiers.</span>
+            </fieldset>
+            <fieldset class="quiz-item">
+              <legend>4. Which Dart constructor is named?</legend>
+              <div class="quiz-options"><label class="quiz-choice"><input data-right="true" name="exitQuiz3"
+                    type="radio" value="0" /><span>Book.freeSample()</span></label><label class="quiz-choice"><input
+                    data-right="false" name="exitQuiz3" type="radio"
+                    value="1" /><span>Book(this.title)</span></label><label class="quiz-choice"><input
+                    data-right="false" name="exitQuiz3" type="radio" value="2" /><span>new Book()</span></label></div>
+              <p aria-live="polite" class="quiz-feedback">Choose one option.</p><span class="answer-detail"
+                hidden="">Named constructors use ClassName.identifier(...).</span>
+            </fieldset>
+            <fieldset class="quiz-item">
+              <legend>5. What does @override signal?</legend>
+              <div class="quiz-options"><label class="quiz-choice"><input data-right="true" name="exitQuiz4"
+                    type="radio" value="0" /><span>An inherited member is being reimplemented</span></label><label
+                  class="quiz-choice"><input data-right="false" name="exitQuiz4" type="radio" value="1" /><span>A
+                    constructor is always constant</span></label><label class="quiz-choice"><input data-right="false"
+                    name="exitQuiz4" type="radio" value="2" /><span>The method is hidden from the library</span></label>
+              </div>
+              <p aria-live="polite" class="quiz-feedback">Choose one option.</p><span class="answer-detail"
+                hidden="">The annotation expresses an intent to override an existing member.</span>
+            </fieldset>
+            <fieldset class="quiz-item">
+              <legend>6. What can an abstract Dart class contain?</legend>
+              <div class="quiz-options"><label class="quiz-choice"><input data-right="false" name="exitQuiz5"
+                    type="radio" value="0" /><span>Only fields</span></label><label class="quiz-choice"><input
+                    data-right="false" name="exitQuiz5" type="radio" value="1" /><span>Only methods without
+                    bodies</span></label><label class="quiz-choice"><input data-right="true" name="exitQuiz5"
+                    type="radio" value="2" /><span>Both implemented and abstract methods</span></label></div>
+              <p aria-live="polite" class="quiz-feedback">Choose one option.</p><span class="answer-detail"
+                hidden="">Abstract classes may share implemented behavior and declare required abstract methods.</span>
+            </fieldset>
+            <fieldset class="quiz-item">
+              <legend>7. What is the key difference between extends and implements?</legend>
+              <div class="quiz-options"><label class="quiz-choice"><input data-right="false" name="exitQuiz6"
+                    type="radio" value="0" /><span>implements inherits all method bodies</span></label><label
+                  class="quiz-choice"><input data-right="true" name="exitQuiz6" type="radio" value="1" /><span>extends
+                    reuses inherited implementation; implements requires fulfilling a contract</span></label><label
+                  class="quiz-choice"><input data-right="false" name="exitQuiz6" type="radio" value="2" /><span>Both
+                    allow extending multiple classes</span></label></div>
+              <p aria-live="polite" class="quiz-feedback">Choose one option.</p><span class="answer-detail"
+                hidden="">Extends inherits accessible implementation, while implements obliges an implementation of the
+                public interface.</span>
+            </fieldset>
+            <fieldset class="quiz-item">
+              <legend>8. What does the with keyword do when used with a Dart mixin?</legend>
+              <div class="quiz-options"><label class="quiz-choice"><input data-right="true" name="exitQuiz7"
+                    type="radio" value="0" /><span>Adds reusable capabilities to a class</span></label><label
+                  class="quiz-choice"><input data-right="false" name="exitQuiz7" type="radio" value="1" /><span>Adds a
+                    second superclass constructor</span></label><label class="quiz-choice"><input data-right="false"
+                    name="exitQuiz7" type="radio" value="2" /><span>Makes all fields nullable</span></label></div>
+              <p aria-live="polite" class="quiz-feedback">Choose one option.</p><span class="answer-detail"
+                hidden="">With applies mixin members without ordinary superclass inheritance.</span>
+            </fieldset>
+          </form>
+          <div class="session03-book-note"><strong>Textbook map:</strong> <em>Flutter and Dart Fundamentals</em>,
+            Chapter 6 (Classes and Objects) and Chapter 7 (Inheritance and Beyond); <em>Flutter Cookbook</em>, Chapter 3
+            (Dart classes and class constructor shorthand, null safety in classes). <strong>Further reading:</strong> <a
+              href="https://dart.dev/language/classes" rel="noopener noreferrer" target="_blank">Dart classes</a> · <a
+              href="https://dart.dev/language/constructors" rel="noopener noreferrer" target="_blank">Constructors</a> ·
+            <a href="https://dart.dev/language/mixins" rel="noopener noreferrer" target="_blank">Mixins</a> · <a
+              href="https://dart.dev/language/class-modifiers" rel="noopener noreferrer" target="_blank">Class
+              modifiers</a>.
+          </div>
+        </section>
+        <footer aria-label="Lesson navigation" class="footer-controls">
+          <div class="footer-left"><span id="footerStep">Section 1 of 12</span><span class="footer-subtitle">Self-paced
+              · resume anytime</span></div>
+          <div class="footer-actions"><button class="footer-btn ghost" id="previousButton" type="button">←
+              Previous</button><button class="footer-btn secondary" id="markButton" type="button">✓ Mark
+              completed</button><button class="footer-btn primary" id="nextButton" type="button">Next →</button></div>
+        </footer>
+      </main>
+      <footer class="small-note" style="padding:20px 40px;text-align:center;border-top:1px solid var(--line)">SICT235 ·
+        PDB2 · 2026–2027 · Guided blended learning</footer>
+    </div>
+  </div>
+</body>
+
+</html>
